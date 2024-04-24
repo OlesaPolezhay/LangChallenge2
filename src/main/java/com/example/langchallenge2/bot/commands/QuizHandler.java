@@ -1,9 +1,10 @@
 package com.example.langchallenge2.bot.commands;
 
+
+import com.example.langchallenge2.bot.controler.UserController;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.extensions.bots.commandbot.commands.BotCommand;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendSticker;
 import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
@@ -12,11 +13,15 @@ import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 @Component
-public class StartCommandHandler extends BotCommand
-{
+public class QuizHandler extends BotCommand{
 
-  public StartCommandHandler(@Value("start") String commandIdentifier,@Value("") String description) {
+
+  private final UserController userController;
+
+  public QuizHandler(@Value("start_quiz") String commandIdentifier,@Value("") String description,
+      UserController userController) {
     super(commandIdentifier, description);
+    this.userController = userController;
   }
 
   @Override
@@ -24,21 +29,23 @@ public class StartCommandHandler extends BotCommand
 
     String stickerWelcome = "CAACAgIAAxkBAAEEzJFmICZkvauEj6gZiDHm3a0-olqosQACuAADUomRI0m50GWI4c3YNAQ";
 
-    String messageWelcome = "\uD83D\uDC4B Привіт " + chat.getFirstName() + "\n\n" +
-        "Я - \uD83C\uDF0ELangChallenger \uD83C\uDF0E\n" +
-        "\n" +
-        "Проходь випробування, заробляй монети, та підвищуй свій рівень знань\uD83C\uDF0E\n" +
-        "\n" +
-        "Якщо потрібна буде допомога друкуй  /help.";
+    String messageWelcome = "почати випробування";
 
     try {
       InputFile sticker = new InputFile( stickerWelcome);
       absSender.execute(new SendSticker(chat.getId().toString(), sticker));
 
-      absSender.execute(new SendMessage(chat.getId().toString(), messageWelcome));
+
+      com.example.langchallenge2.bot.model.User user1 = new com.example.langchallenge2.bot.model.User(
+          Math.toIntExact(user.getId()));
+      userController.addOneEmployee(user1);
+      System.out.println( userController.findAllEmployees());
+
+      System.out.println(user.getId());
 
     } catch (TelegramApiException e) {
       throw new RuntimeException(e);
     }
   }
 }
+
