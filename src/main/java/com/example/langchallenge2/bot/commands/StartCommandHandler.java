@@ -1,5 +1,8 @@
 package com.example.langchallenge2.bot.commands;
 
+import com.example.langchallenge2.bot.controler.UserController;
+import com.example.langchallenge2.bot.message.MessageTest;
+import com.example.langchallenge2.bot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.extensions.bots.commandbot.commands.BotCommand;
@@ -14,27 +17,28 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 @Component
 public class StartCommandHandler extends BotCommand
 {
+  private final UserController userController;
 
-  public StartCommandHandler(@Value("start") String commandIdentifier,@Value("") String description) {
+  public StartCommandHandler(@Value("start") String commandIdentifier,@Value("") String description,
+      UserController userController, UserRepository userRepository) {
     super(commandIdentifier, description);
+    this.userController = userController;
   }
 
   @Override
   public void execute(AbsSender absSender, User user, Chat chat, String[] strings) {
 
-    String stickerWelcome = "CAACAgIAAxkBAAEEzJFmICZkvauEj6gZiDHm3a0-olqosQACuAADUomRI0m50GWI4c3YNAQ";
+   com.example.langchallenge2.bot.model.User user1 = new com.example.langchallenge2.bot.model.User(
+        Math.toIntExact(user.getId()), chat.getFirstName());
 
-    String messageWelcome = "\uD83D\uDC4B Привіт " + chat.getFirstName() + "\n\n" +
-        "Я - \uD83C\uDF0ELangChallenger \uD83C\uDF0E\n" +
-        "\n" +
-        "Проходь випробування, заробляй монети, та підвищуй свій рівень знань\uD83C\uDF0E\n" +
-        "\n" +
-        "Якщо потрібна буде допомога друкуй  /help.";
+   userController.addOneEmployee(user1);
+
+    String messageWelcome = MessageTest.WelcomeMessage1 + chat.getFirstName() + "\n\n" +
+        MessageTest.WelcomeMessage2;
 
     try {
-      InputFile sticker = new InputFile( stickerWelcome);
+      InputFile sticker = new InputFile( MessageTest.StickerWelcome);
       absSender.execute(new SendSticker(chat.getId().toString(), sticker));
-
       absSender.execute(new SendMessage(chat.getId().toString(), messageWelcome));
 
     } catch (TelegramApiException e) {

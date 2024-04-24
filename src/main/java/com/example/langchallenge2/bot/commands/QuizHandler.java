@@ -14,8 +14,6 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 @Component
 public class QuizHandler extends BotCommand{
-
-
   private final UserController userController;
 
   public QuizHandler(@Value("start_quiz") String commandIdentifier,@Value("") String description,
@@ -34,14 +32,6 @@ public class QuizHandler extends BotCommand{
     try {
       InputFile sticker = new InputFile( stickerWelcome);
       absSender.execute(new SendSticker(chat.getId().toString(), sticker));
-
-
-      com.example.langchallenge2.bot.model.User user1 = new com.example.langchallenge2.bot.model.User(
-          Math.toIntExact(user.getId()));
-      userController.addOneEmployee(user1);
-      System.out.println( userController.findAllEmployees());
-
-      System.out.println(user.getId());
 
     } catch (TelegramApiException e) {
       throw new RuntimeException(e);

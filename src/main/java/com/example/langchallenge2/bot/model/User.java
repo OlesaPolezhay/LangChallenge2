@@ -47,6 +47,14 @@ public class User{
     this.botState = "start";
   }
 
+  public User(int chatId, String name) {
+    this.chatId = chatId;
+    this.name = name;
+    this.score = 0;
+    this.highScore = 0;
+    this.botState = "start";
+  }
+
   public User() {
 
   }
