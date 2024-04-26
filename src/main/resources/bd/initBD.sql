@@ -12,6 +12,9 @@ CREATE TABLE users
 );
 
 CREATE TABLE lang_quiz
+
+
+
 (
     id             SERIAL PRIMARY KEY,
     question       VARCHAR NOT NULL,

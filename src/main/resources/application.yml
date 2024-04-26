@@ -1,4 +1,25 @@
 bot:
-  token: 6525218192:AAErrRUaTq5PmdAAz7L_j7BQTBWA9a6ExmA
-  username: test_lesia2_bot
+  token: 7027215335:AAE6qH6Kaf25DxrNOc9-A66bSryUxvvxC08
+  username: LangChallengeBot
+
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/langchallengebot?user=postgres&password=1111
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: 1111
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.PostgreSQLDialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database: postgresql
+  sql:
+    init:
+      mode: Always
+
 
