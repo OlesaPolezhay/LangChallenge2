@@ -17,17 +17,35 @@ public class UserController {
     this.userRepository = userRepository;
   }
 
-  @GetMapping("/users")
-  public Iterable<User> findAllEmployees() {
-    return this.userRepository.findAll();
-  }
-
-
   public User addOneEmployee(User user) {
     Optional<User> existingUser = userRepository.findByChatId(user.getChatId());
-    return existingUser.orElseGet(() -> userRepository.save(user));
+    existingUser.ifPresent(userRepository::delete);
+    return userRepository.save(user);
   }
 
+  public void incrementScore(User user) {
+    Optional<User> existingUserOptional = userRepository.findByChatId(user.getChatId());
+    if (existingUserOptional.isPresent()) {
+      User existingUser = existingUserOptional.get();
+      existingUser.setScore(existingUser.getScore() + 1);
+      userRepository.save(existingUser);
+    } else {
+      userRepository.save(user);
+    }
+  }
+
+  public int getScoreByChatId(long chatId) {
+    Optional<User> userOptional = userRepository.findByChatId((int) chatId);
+    if (userOptional.isPresent()) {
+      User user = userOptional.get();
+      return user.getScore();
+    } else {
+      // Обробка ситуації, коли користувача не знайдено за вказаним chatId
+      return -1; // Наприклад, повертаємо -1 або інше значення за замовчуванням
+    }
+  }
 
 }
+
+
 

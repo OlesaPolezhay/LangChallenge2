@@ -1,6 +1,7 @@
 bot:
-  token: 7168092138:AAEjxPU7NVqfvFyItTM2k0qEmBetgfdGdNg
-  username: lesia_test_bot
+  token: 7027215335:AAE6qH6Kaf25DxrNOc9-A66bSryUxvvxC08
+  username: LangChallengeBot
+
 
 spring:
   datasource:
