@@ -75,5 +75,9 @@ public class User{
   public void setDayNumber(Integer dayNumber) {
     this.dayNumber = dayNumber;
   }
+
+  public void setQuestionNumber(Integer questionNumber) {
+    this.questionNumber = questionNumber;
+  }
 }
 

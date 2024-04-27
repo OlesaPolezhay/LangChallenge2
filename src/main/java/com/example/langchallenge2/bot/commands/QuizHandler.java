@@ -1,11 +1,10 @@
 package com.example.langchallenge2.bot.commands;
 
 
-import com.example.langchallenge2.bot.MyTelegramBot;
+import com.example.langchallenge2.bot.controler.QuestionController;
 import com.example.langchallenge2.bot.controler.UserController;
 import com.example.langchallenge2.bot.message.MessageTest;
 import com.example.langchallenge2.bot.model.Question;
-import com.example.langchallenge2.bot.repository.QuestionRepository;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,19 +28,19 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 public class QuizHandler extends BotCommand {
 
   private final UserController userController;
-  private final QuestionRepository questionRepository;
+  private final QuestionController questionController;
 
   public QuizHandler(@Value(MessageTest.StartCompetition) String commandIdentifier,
       @Value("") String description,
-      UserController userController, QuestionRepository questionRepository) {
+      UserController userController, QuestionController questionController) {
     super(commandIdentifier, description);
     this.userController = userController;
-    this.questionRepository = questionRepository;
+    this.questionController = questionController;
   }
 
   @Override
   public void execute(AbsSender absSender, User user, Chat chat, String[] strings) {
-    Question question = questionRepository.getRandomQuestion();
+    Question question = questionController.getRandomQuestion();
     //SendMessage message = new SendMessage(chat.getId().toString(), "ojfd");
 
     try {
@@ -164,7 +163,6 @@ public class QuizHandler extends BotCommand {
     absSender.execute(new SendMessage(chat.getId().toString(), resultText));
     absSender.execute(new SendSticker(chat.getId().toString(), sticker));
   }
-
 
 }
 

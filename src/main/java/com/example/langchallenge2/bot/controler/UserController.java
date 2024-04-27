@@ -3,9 +3,6 @@ package com.example.langchallenge2.bot.controler;
 import com.example.langchallenge2.bot.model.User;
 import com.example.langchallenge2.bot.repository.UserRepository;
 import java.util.Optional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -17,10 +14,10 @@ public class UserController {
     this.userRepository = userRepository;
   }
 
-  public User addOneEmployee(User user) {
+  public void addOneEmployee(User user) {
     Optional<User> existingUser = userRepository.findByChatId(user.getChatId());
     existingUser.ifPresent(userRepository::delete);
-    return userRepository.save(user);
+    userRepository.save(user);
   }
 
   public void incrementScore(User user) {
@@ -39,6 +36,8 @@ public class UserController {
     if (existingUserOptional.isPresent()) {
       User existingUser = existingUserOptional.get();
       existingUser.setDayNumber(existingUser.getDayNumber() + 1);
+      existingUser.setScore(0);
+      existingUser.setQuestionNumber(0);
       return userRepository.save(existingUser);
     } else {
       return userRepository.save(user);
