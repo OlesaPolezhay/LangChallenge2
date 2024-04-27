@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository  extends JpaRepository<User, Integer> {
-  Optional<User> findByChatId(Integer chatId);
+  Optional<User> findByChatId(Long chatId);
 
 
 

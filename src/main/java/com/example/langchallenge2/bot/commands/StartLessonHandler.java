@@ -33,10 +33,10 @@ public class StartLessonHandler extends BotCommand {
     SendMessage messageTheory;
 
     com.example.langchallenge2.bot.model.User user1 = new com.example.langchallenge2.bot.model.User(
-        Math.toIntExact(user.getId()), chat.getFirstName());
-    user1 = userController.incrementDay(user1);
+        user.getId(), chat.getFirstName());
+    userController.incrementDay(user1);
 
-    if(user1.getDayNumber() == 1) {
+    if(user1.getDayNumber() == 0) {
       messageTheory = new SendMessage(chat.getId().toString(),
           MessageTest.MessageTheoryForTheFirstLesson);
       ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();

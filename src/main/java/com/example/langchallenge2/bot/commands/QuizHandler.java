@@ -43,6 +43,11 @@ public class QuizHandler extends BotCommand {
     Question question = questionController.getRandomQuestion();
     //SendMessage message = new SendMessage(chat.getId().toString(), "ojfd");
 
+    com.example.langchallenge2.bot.model.User user1 = new com.example.langchallenge2.bot.model.User(
+       user.getId(), chat.getFirstName());
+
+    userController.incrementScore(user1);
+
     try {
       if (question.getSticker() != null) {
         InputFile sticker = new InputFile(question.getSticker());
@@ -129,7 +134,7 @@ public class QuizHandler extends BotCommand {
 
   public void correctAnswer(AbsSender absSender, User user, Chat chat, String[] strings) {
     com.example.langchallenge2.bot.model.User user1 = new com.example.langchallenge2.bot.model.User(
-        Math.toIntExact(user.getId()), chat.getFirstName());
+      user.getId(), chat.getFirstName());
 
     userController.incrementScore(user1);
 
@@ -139,7 +144,7 @@ public class QuizHandler extends BotCommand {
   public void incorrectAnswer(AbsSender absSender, User user, Chat chat, String[] strings)
       throws TelegramApiException {
     com.example.langchallenge2.bot.model.User user1 = new com.example.langchallenge2.bot.model.User(
-        Math.toIntExact(user.getId()), chat.getFirstName());
+        user.getId(), chat.getFirstName());
 
     int score = userController.getScoreByChatId(user1.getChatId());
 

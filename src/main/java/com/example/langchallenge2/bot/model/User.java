@@ -21,7 +21,7 @@ public class User{
 
   @Column(name = "chat_id", unique = true, nullable = false)
   @NotNull
-  private Integer chatId;
+  private Long chatId;
 
   @Column(name = "name", unique = true, nullable = false)
   @NotBlank
@@ -45,7 +45,7 @@ public class User{
   @Column(name = "questionNumber")
   private Integer questionNumber;
 
-  public User(int chatId) {
+  public User(long chatId) {
     this.chatId = chatId;
     this.name = String.valueOf(chatId);
     this.score = 0;
@@ -55,7 +55,7 @@ public class User{
     this.questionNumber = 0;
   }
 
-  public User(int chatId, String name) {
+  public User(long chatId, String name) {
     this.chatId = chatId;
     this.name = name;
     this.score = 0;

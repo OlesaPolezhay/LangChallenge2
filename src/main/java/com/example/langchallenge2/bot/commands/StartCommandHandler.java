@@ -34,7 +34,7 @@ public class StartCommandHandler extends BotCommand
   public void execute(AbsSender absSender, User user, Chat chat, String[] strings) {
 
    com.example.langchallenge2.bot.model.User user1 = new com.example.langchallenge2.bot.model.User(
-        Math.toIntExact(user.getId()), chat.getFirstName());
+       user.getId(), chat.getFirstName());
 
    userController.addOneEmployee(user1);
 
