@@ -45,6 +45,14 @@ public class Question {
   @NotBlank
   private String optionThree;
 
+  @Column(name = "dayNumber")
+  @NotBlank
+  private Integer dayNumber;
+
+  @Column(name = "questionNumber")
+  @NotBlank
+  private Integer questionNumber;
+
   @Override
   public String toString() {
     return "Question{" +
@@ -56,6 +64,8 @@ public class Question {
         ", optionOne='" + optionOne + '\'' +
         ", optionTwo='" + optionTwo + '\'' +
         ", optionThree='" + optionThree + '\'' +
+        ", dayNumber=" + dayNumber +
+        ", questionNumber=" + questionNumber +
         '}';
   }
 

@@ -39,12 +39,20 @@ public class User{
   @NotNull
   private String botState;
 
+  @Column(name = "dayNumber")
+  private Integer dayNumber;
+
+  @Column(name = "questionNumber")
+  private Integer questionNumber;
+
   public User(int chatId) {
     this.chatId = chatId;
     this.name = String.valueOf(chatId);
     this.score = 0;
     this.highScore = 0;
     this.botState = "start";
+    this.dayNumber = 0;
+    this.questionNumber = 0;
   }
 
   public User(int chatId, String name) {
@@ -53,14 +61,19 @@ public class User{
     this.score = 0;
     this.highScore = 0;
     this.botState = "start";
+    this.dayNumber = 0;
+    this.questionNumber = 0;
   }
 
   public User() {
 
   }
-
   public void setScore(Integer score) {
     this.score = score;
+  }
+
+  public void setDayNumber(Integer dayNumber) {
+    this.dayNumber = dayNumber;
   }
 }
 

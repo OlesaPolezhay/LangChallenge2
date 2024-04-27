@@ -7,7 +7,9 @@ import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-@Component
+
+//  не використовується
+
 public class CallbackQueryHandler extends BotCommand {
 
   public void handleCallbackQuery(AbsSender absSender, CallbackQuery callbackQuery) {

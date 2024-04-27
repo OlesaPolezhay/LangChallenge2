@@ -1,6 +1,7 @@
 package com.example.langchallenge2.bot;
 
 import com.example.langchallenge2.bot.commands.QuizHandler;
+import com.example.langchallenge2.bot.commands.StartLessonHandler;
 import com.example.langchallenge2.bot.message.MessageTest;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ public class MyTelegramBot extends TelegramLongPollingCommandBot {
   private final String username;
   @Autowired
   private QuizHandler quizHandler;
+  @Autowired
+  private StartLessonHandler startLessonHandler;
 
 
   public MyTelegramBot(@Value("${bot.token}") String botToken,
@@ -34,6 +37,15 @@ public class MyTelegramBot extends TelegramLongPollingCommandBot {
 
   @Override
   public void processNonCommandUpdate(Update update) {
+    if (update.hasMessage() && update.getMessage().hasText()) {
+      String messageText = update.getMessage().getText();
+      if(messageText.equals(MessageTest.MessageButtonStartTest)){
+        quizHandler.execute(this, update.getMessage().getFrom() ,update.getMessage().getChat(), null);
+      }
+      if(messageText.equals(MessageTest.MessageButtonStartLesson)){
+       startLessonHandler.execute(this, update.getMessage().getFrom() ,update.getMessage().getChat(), null);
+      }
+    }
     if (update.hasCallbackQuery()) {
       CallbackQuery callbackQuery = update.getCallbackQuery();
       String callbackData = callbackQuery.getData();

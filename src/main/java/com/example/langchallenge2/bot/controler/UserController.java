@@ -34,6 +34,17 @@ public class UserController {
     }
   }
 
+  public User incrementDay(User user) {
+    Optional<User> existingUserOptional = userRepository.findByChatId(user.getChatId());
+    if (existingUserOptional.isPresent()) {
+      User existingUser = existingUserOptional.get();
+      existingUser.setDayNumber(existingUser.getDayNumber() + 1);
+      return userRepository.save(existingUser);
+    } else {
+      return userRepository.save(user);
+    }
+  }
+
   public int getScoreByChatId(long chatId) {
     Optional<User> userOptional = userRepository.findByChatId((int) chatId);
     if (userOptional.isPresent()) {

@@ -48,7 +48,7 @@ public class StartCommandHandler extends BotCommand
     List<KeyboardRow> keyboard = new ArrayList<>();
     KeyboardRow row = new KeyboardRow();
 
-    row.add(new KeyboardButton(MessageTest.StartCompetition));
+    row.add(new KeyboardButton(MessageTest.MessageButtonStartLesson));
     keyboard.add(row);
 
     keyboardMarkup.setKeyboard(keyboard);
