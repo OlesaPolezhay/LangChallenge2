@@ -52,6 +52,17 @@ public class QuizHandler extends BotCommand {
     int question_number = userController.getQuestionNumberByChartIc(chat.getId());
     int count_question = questionController.getCountQuestionInDay(day_number);
 
+    if (day_number == 1 && question_number == 1){
+      SendMessage sendMessage = new SendMessage(chat.getId().toString(), MessageTest.MessageQuestionForFirstDays);
+      sendMessage.enableHtml(true);
+      try {
+        absSender.execute(sendMessage);
+        Thread.sleep(3000);
+      } catch (TelegramApiException | InterruptedException e) {
+        throw new RuntimeException(e);
+      }
+    }
+
     if (question_number <= count_question) {
       Question question = questionController.getQuestionInDay(day_number, question_number);
       try {
@@ -146,17 +157,32 @@ public class QuizHandler extends BotCommand {
     return message;
   }
 
-  public void correctAnswer(AbsSender absSender, User user, Chat chat, String[] strings) {
+  public void correctAnswer(AbsSender absSender, User user, Chat chat, String[] strings)
+      throws TelegramApiException, InterruptedException {
     com.example.langchallenge2.bot.model.User user1 = new com.example.langchallenge2.bot.model.User(
-      user.getId(), chat.getFirstName());
+        user.getId(), chat.getFirstName());
 
     userController.incrementScore(user1);
 
+    int day_number = userController.getDayByChatId(chat.getId());
+    if (day_number == 1) {
+
+      int question_number = userController.getQuestionNumberByChartIc(chat.getId());
+      String filePath = "src/main/resources/picture/1_" + question_number + ".png";
+      InputFile photo = new InputFile(new File(filePath));
+      SendPhoto sendPhoto = new SendPhoto(chat.getId().toString(), photo);
+      try {
+        absSender.execute(sendPhoto);
+        Thread.sleep(4000);
+      } catch (TelegramApiException e) {
+        e.printStackTrace();
+      }
+    }
     execute(absSender, user, chat, strings);
   }
 
   public void incorrectAnswer(AbsSender absSender, User user, Chat chat, String[] strings)
-      throws TelegramApiException {
+      throws TelegramApiException, InterruptedException {
     com.example.langchallenge2.bot.model.User user1 = new com.example.langchallenge2.bot.model.User(
         user.getId(), chat.getFirstName());
 
@@ -170,6 +196,8 @@ public class QuizHandler extends BotCommand {
     SendMessage sendMessage = new SendMessage(chat.getId().toString(),
         correctAnswer);
     absSender.execute(sendMessage);
+    Thread.sleep(2000);
+
 
     execute(absSender, user, chat, strings);
   }

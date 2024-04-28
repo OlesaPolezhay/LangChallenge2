@@ -42,8 +42,20 @@ public class StartLessonHandler extends BotCommand {
     int lesson = userController.getDayByChatId(chat.getId());
 
     if(questionController.getCountQuestionInDay(lesson) != 0) {
+      SendMessage sendMessage = new SendMessage(chat.getId().toString(), MessageTest.MessageTheoryForTheFirstLesson);
+      sendMessage.enableHtml(true);
+      SendMessage sendMessage2 = new SendMessage(chat.getId().toString(), MessageTest.MessageTheoryForTheFirstLesson2);
+      sendMessage2.enableHtml(true);
+      try {
+        absSender.execute(sendMessage);
+        Thread.sleep(3000);
+        absSender.execute(sendMessage2);
+      } catch (TelegramApiException | InterruptedException e) {
+        throw new RuntimeException(e);
+      }
+
       messageTheory = new SendMessage(chat.getId().toString(),
-          MessageTest.MessageTheoryForTheFirstLesson);
+          MessageTest.MessageStartTest);
       ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
       List<KeyboardRow> keyboard = new ArrayList<>();
       KeyboardRow row = new KeyboardRow();

@@ -59,6 +59,7 @@ public class MyTelegramBot extends TelegramLongPollingCommandBot {
       try {
         if ("/test_correct".equals(callbackData)) {
           execute(new SendMessage(chatId.toString(), MessageTest.CorrectAnswer));
+          Thread.sleep(1000);
           quizHandler.correctAnswer(this, callbackQuery.getFrom(),
               callbackQuery.getMessage().getChat(), null);
         } else if ("/test_incorrect1".equals(callbackData) || "/test_incorrect2".equals(callbackData)
@@ -66,7 +67,7 @@ public class MyTelegramBot extends TelegramLongPollingCommandBot {
           quizHandler.incorrectAnswer(this, callbackQuery.getFrom(),
               callbackQuery.getMessage().getChat(), null);
         }
-      } catch (TelegramApiException e) {
+      } catch (TelegramApiException | InterruptedException e) {
         e.printStackTrace();
       }
     }

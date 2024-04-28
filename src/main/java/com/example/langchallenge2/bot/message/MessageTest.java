@@ -29,19 +29,24 @@ public class MessageTest {
 
   public static final String MessageTheoryForTheFirstLesson = "\uD83E\uDD16 Hallo! \n"
       + "Ich freue mich dich hier zu sehen\uD83D\uDE0D\n"
-      + "Сьогодні я поясню тобі тему Komposita\n"
-      + "Прочитай правило, це займе лише 3 хвилинки твого часу, а потім тебе чекають цікаві тести ✨\n"
-      + "\uD83D\uDCCCKomposita є складними іменниками у німецькій мові, що утворюються шляхом поєднання двох або більше іменників для створення нового слова з відмінним значенням. Кожен композит складається з головного слова, розташованого в кінці, яке визначає основний зміст новоутвореного слова, та одного або декількох визначників, які деталізують головне слово. Артикль композиту визначається за артиклем головного слова.\n"
+      + "<b>Сьогодні я поясню тобі тему Komposita</b>\n"
+      + "<i>Прочитай правило, це займе лише 3 хвилинки твого часу, а потім тебе чекають цікаві тести</i> ✨\n";
+
+  public static final String MessageTheoryForTheFirstLesson2 = "\uD83D\uDCCCKomposita є складними іменниками у німецькій мові, що утворюються шляхом поєднання двох або більше іменників для створення нового слова з відмінним значенням. Кожен композит складається з головного слова, розташованого в кінці, яке визначає основний зміст новоутвореного слова, та одного або декількох визначників, які деталізують головне слово. Артикль композиту визначається за артиклем головного слова.\n"
       + "Наприклад:\n"
-      + "die Küche + der Schrank:\n"
-      + "der Küchenschrank*\n"
-      + "кухонна шафа\n"
+      + "<i> die Küche + der Schrank:</i>\n"
+      + "<i> der Küchenschrank*</i>\n"
+      + "<i> кухонна шафа</i>"
       + "*Коли слово складається з двох або більше іменників, між визначником та основним словом іноді вставляється звук. Після -e (наприклад, у слові Küche) це часто буває -n. У багатьох випадках використовуєтья -s, іноді також -es, -ens або -er.";
 
   public static final String MessageButtonStartTest = "Почати тест";
+
+  public static final String MessageStartTest = "Для початку тестування натисніть на кнопку";
   public static final String MessageButtonStartLesson = "Почати урок";
   public static final String MessageNotAvailableLesson = "На разі немає нових випробувань";
   public static final String MessageChooseButton = "Обери дію";
   public static final String MessageTryAgain = "Пройти тест ще раз";
   public static final String MessageStartNewLesson = "Перейти до наступного уроку";
+  public static final String MessageQuestionForFirstDays = "Утвори правильний <b>Коmposita</b> з двох іменників. \n"
+      + "PS. Що означає це слово ти відразу побачиш на картинці. <i>Viel Spaß</i> \uD83D\uDE09";
 }
