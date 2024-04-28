@@ -47,8 +47,9 @@ public class StartCommandHandler extends BotCommand
     ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
     List<KeyboardRow> keyboard = new ArrayList<>();
     KeyboardRow row = new KeyboardRow();
-
-    row.add(new KeyboardButton(MessageTest.MessageButtonStartLesson));
+    KeyboardButton button = new KeyboardButton(MessageTest.MessageButtonStartLesson);
+    keyboardMarkup.setResizeKeyboard(true);
+    row.add(button);
     keyboard.add(row);
 
     keyboardMarkup.setKeyboard(keyboard);

@@ -59,16 +59,18 @@ public class StartLessonHandler extends BotCommand {
       ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
       List<KeyboardRow> keyboard = new ArrayList<>();
       KeyboardRow row = new KeyboardRow();
-      KeyboardButton button = new KeyboardButton(MessageTest.MessageButtonStartTest);
+      KeyboardButton button = new KeyboardButton( MessageTest.MessageButtonStartTest );
+      keyboardMarkup.setResizeKeyboard(true);
       row.add(button);
       keyboard.add(row);
-      keyboardMarkup.setKeyboard(List.of(keyboard.toArray(new KeyboardRow[keyboard.size()])));
+      keyboardMarkup.setKeyboard(keyboard);
       messageTheory.setReplyMarkup(keyboardMarkup);
     }
     else{
       messageTheory = new SendMessage(chat.getId().toString(), MessageTest.MessageNotAvailableLesson);
     }
       try {
+        messageTheory.enableHtml(true);
         absSender.execute(messageTheory);
       } catch (TelegramApiException e) {
         throw new RuntimeException(e);

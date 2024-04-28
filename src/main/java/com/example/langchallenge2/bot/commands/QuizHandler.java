@@ -52,8 +52,9 @@ public class QuizHandler extends BotCommand {
     int question_number = userController.getQuestionNumberByChartIc(chat.getId());
     int count_question = questionController.getCountQuestionInDay(day_number);
 
-    if (day_number == 1 && question_number == 1){
-      SendMessage sendMessage = new SendMessage(chat.getId().toString(), MessageTest.MessageQuestionForFirstDays);
+    if (day_number == 1 && question_number == 1) {
+      SendMessage sendMessage = new SendMessage(chat.getId().toString(),
+          MessageTest.MessageQuestionForFirstDays);
       sendMessage.enableHtml(true);
       try {
         absSender.execute(sendMessage);
@@ -79,8 +80,7 @@ public class QuizHandler extends BotCommand {
       } catch (TelegramApiException e) {
         e.printStackTrace();
       }
-    }
-    else {
+    } else {
       try {
         printTheTestResult(absSender, user, chat);
       } catch (TelegramApiException e) {
@@ -166,17 +166,7 @@ public class QuizHandler extends BotCommand {
 
     int day_number = userController.getDayByChatId(chat.getId());
     if (day_number == 1) {
-
-      int question_number = userController.getQuestionNumberByChartIc(chat.getId());
-      String filePath = "src/main/resources/picture/1_" + question_number + ".png";
-      InputFile photo = new InputFile(new File(filePath));
-      SendPhoto sendPhoto = new SendPhoto(chat.getId().toString(), photo);
-      try {
-        absSender.execute(sendPhoto);
-        Thread.sleep(4000);
-      } catch (TelegramApiException e) {
-        e.printStackTrace();
-      }
+      sendPhotoAnswer(absSender, chat);
     }
     execute(absSender, user, chat, strings);
   }
@@ -191,13 +181,16 @@ public class QuizHandler extends BotCommand {
 
     Question question = questionController.getQuestionInDay(day_number, question_number);
 
-    String correctAnswer =MessageTest.IncorrectAnswer + MessageTest.IncorrectAnswer2 + question.getCorrectAnswer();
+    String correctAnswer =
+        MessageTest.IncorrectAnswer + MessageTest.IncorrectAnswer2 + question.getCorrectAnswer();
 
     SendMessage sendMessage = new SendMessage(chat.getId().toString(),
         correctAnswer);
     absSender.execute(sendMessage);
-    Thread.sleep(2000);
 
+    if (day_number == 1) {
+      sendPhotoAnswer(absSender, chat);
+    }
 
     execute(absSender, user, chat, strings);
   }
@@ -216,20 +209,19 @@ public class QuizHandler extends BotCommand {
     String resultText = MessageTest.ResultMessage + score;
 
     InputFile sticker;
-    if (score <= 2){
+    if (score <= 2) {
       sticker = new InputFile(MessageTest.StickerBadResult);
-      resultText +=  MessageTest.MessageBadResult;
-    } else if (score == 3){
+      resultText += MessageTest.MessageBadResult;
+    } else if (score == 3) {
       sticker = new InputFile(MessageTest.StickerGoodResult);
-      resultText +=  MessageTest.MessageGoodResult;
-    }else if (score == 4){
+      resultText += MessageTest.MessageGoodResult;
+    } else if (score == 4) {
       sticker = new InputFile(MessageTest.StickerVeryGoodResult);
       resultText += MessageTest.MessageVeryGoodResult;
-    }else {
+    } else {
       sticker = new InputFile(MessageTest.StickerAmazingResult);
       resultText += MessageTest.MessageAmazingResult;
     }
-
 
     absSender.execute(new SendMessage(chat.getId().toString(), resultText));
     absSender.execute(new SendSticker(chat.getId().toString(), sticker));
@@ -238,31 +230,48 @@ public class QuizHandler extends BotCommand {
 
   }
 
-   public void navigateNextOrRetry(AbsSender absSender, User user, Chat chat)
-       throws TelegramApiException {
+  public void navigateNextOrRetry(AbsSender absSender, User user, Chat chat)
+      throws TelegramApiException {
 
-     SendMessage messageTheory;
-     messageTheory = new SendMessage(chat.getId().toString(),
+    SendMessage messageTheory;
+    messageTheory = new SendMessage(chat.getId().toString(),
         MessageTest.MessageChooseButton);
-     ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
-     List<KeyboardRow> keyboard = new ArrayList<>();
-     KeyboardRow row = new KeyboardRow();
-     KeyboardButton button = new KeyboardButton(MessageTest.MessageTryAgain);
-     KeyboardButton button2 = new KeyboardButton(MessageTest.MessageStartNewLesson);
-     row.add(button);
-     row.add(button2);
-     keyboard.add(row);
-     keyboardMarkup.setKeyboard(List.of(keyboard.toArray(new KeyboardRow[keyboard.size()])));
-     messageTheory.setReplyMarkup(keyboardMarkup);
-     absSender.execute(messageTheory);
-   }
+    ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
+    List<KeyboardRow> keyboard = new ArrayList<>();
+    KeyboardRow row = new KeyboardRow();
+    KeyboardButton button = new KeyboardButton(MessageTest.MessageTryAgain);
+    KeyboardButton button2 = new KeyboardButton(MessageTest.MessageStartNewLesson);
+    keyboardMarkup.setResizeKeyboard(true);
+    row.add(button);
+    row.add(button2);
+    keyboard.add(row);
+    keyboardMarkup.setKeyboard(List.of(keyboard.toArray(new KeyboardRow[keyboard.size()])));
+    messageTheory.setReplyMarkup(keyboardMarkup);
+    absSender.execute(messageTheory);
+  }
 
-   public void resetTest (AbsSender absSender, User user, Chat chat, String[] strings){
-     com.example.langchallenge2.bot.model.User user1 = new com.example.langchallenge2.bot.model.User(
-         user.getId(), chat.getFirstName());
+  public void resetTest(AbsSender absSender, User user, Chat chat, String[] strings) {
+    com.example.langchallenge2.bot.model.User user1 = new com.example.langchallenge2.bot.model.User(
+        user.getId(), chat.getFirstName());
     userController.resetScore(user1);
     userController.resetQuestionNumber(user1);
     execute(absSender, user, chat, strings);
-   }
+  }
+
+  public void sendPhotoAnswer(AbsSender absSender, Chat chat) {
+
+    int question_number = userController.getQuestionNumberByChartIc(chat.getId());
+    String filePath = "src/main/resources/picture/1_" + question_number + ".png";
+    InputFile photo = new InputFile(new File(filePath));
+    SendPhoto sendPhoto = new SendPhoto(chat.getId().toString(), photo);
+    try {
+      absSender.execute(sendPhoto);
+      Thread.sleep(2000);
+    } catch (TelegramApiException e) {
+      e.printStackTrace();
+    } catch (InterruptedException e) {
+      throw new RuntimeException(e);
+    }
+  }
 }
 
