@@ -37,11 +37,11 @@ public class StartLessonHandler extends BotCommand {
 
     com.example.langchallenge2.bot.model.User user1 = new com.example.langchallenge2.bot.model.User(
         user.getId(), chat.getFirstName());
-    userController.incrementDay(user1);
 
     int lesson = userController.getDayByChatId(chat.getId());
 
-    if(questionController.getCountQuestionInDay(lesson) != 0) {
+    if(questionController.getCountQuestionInDay(lesson + 1) != 0) {
+      userController.incrementDay(user1);
       SendMessage sendMessage = new SendMessage(chat.getId().toString(), MessageTest.MessageTheoryForTheFirstLesson);
       sendMessage.enableHtml(true);
       SendMessage sendMessage2 = new SendMessage(chat.getId().toString(), MessageTest.MessageTheoryForTheFirstLesson2);

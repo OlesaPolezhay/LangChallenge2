@@ -258,17 +258,33 @@ public class QuizHandler extends BotCommand {
     execute(absSender, user, chat, strings);
   }
 
-  public void sendPhotoAnswer(AbsSender absSender, Chat chat) {
+  public void sendPhotoAnswer(AbsSender absSender, Chat chat) throws TelegramApiException {
 
     int question_number = userController.getQuestionNumberByChartIc(chat.getId());
-    String filePath = "src/main/resources/picture/1_" + question_number + ".png";
-    InputFile photo = new InputFile(new File(filePath));
-    SendPhoto sendPhoto = new SendPhoto(chat.getId().toString(), photo);
+
+    SendMessage sendMessage = new SendMessage(chat.getId().toString(), "Наступне питання");
+    if(question_number == 1){
+      InputFile sticker = new InputFile("CAACAgIAAxkBAAEFDtRmLqkF0jd-MwrvA2pcHs7O3BpdOAAC_0sAAoLncElPfNFAxETvszQE");
+      absSender.execute(new SendSticker(chat.getId().toString(), sticker));
+    } else if (question_number == 2){
+      InputFile sticker = new InputFile("CAACAgIAAxkBAAEFDtZmLqkGCSqX2HwLImaUF1n1acZcaQACF1EAAtx0cEn-seKWchHvlTQE");
+      absSender.execute(new SendSticker(chat.getId().toString(), sticker));
+    } else if (question_number == 3){
+      InputFile sticker = new InputFile("CAACAgIAAxkBAAEFDthmLqkIOO4_JCnNYichu6e1RKeWjwACOEgAAsEjeEnUacqGVRqbjzQE");
+      absSender.execute(new SendSticker(chat.getId().toString(), sticker));
+    } else if (question_number == 4){
+      InputFile sticker = new InputFile("CAACAgIAAxkBAAEFDtpmLqkJtsVXSFGBAaDBB884v_UwLwACLUYAArGLeEmSKCGexAd8FTQE");
+      absSender.execute(new SendSticker(chat.getId().toString(), sticker));
+    } else if (question_number == 5){
+      InputFile sticker = new InputFile("CAACAgIAAxkBAAEFDuRmLqkRVIXSFEsRP4VzolQMoVSDagAC4U4AAi8ucElJc05gJAaItTQE");
+      absSender.execute(new SendSticker(chat.getId().toString(), sticker));
+    }
+
     try {
-      absSender.execute(sendPhoto);
       Thread.sleep(2000);
-    } catch (TelegramApiException e) {
-      e.printStackTrace();
+      if (question_number != 5) {
+        absSender.execute(sendMessage);
+      }
     } catch (InterruptedException e) {
       throw new RuntimeException(e);
     }
