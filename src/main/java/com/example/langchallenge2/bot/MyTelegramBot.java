@@ -48,7 +48,7 @@ public class MyTelegramBot extends TelegramLongPollingCommandBot {
       if(messageText.equals(MessageTest.MessageTryAgain)){
         quizHandler.resetTest(this, update.getMessage().getFrom() ,update.getMessage().getChat(), null);
       }if(messageText.equals(MessageTest.MessageStartNewLesson)){
-        quizHandler.resetTest(this, update.getMessage().getFrom() ,update.getMessage().getChat(), null);
+        startLessonHandler.execute(this, update.getMessage().getFrom() ,update.getMessage().getChat(), null);
       }
     }
     if (update.hasCallbackQuery()) {
@@ -61,7 +61,8 @@ public class MyTelegramBot extends TelegramLongPollingCommandBot {
           execute(new SendMessage(chatId.toString(), MessageTest.CorrectAnswer));
           quizHandler.correctAnswer(this, callbackQuery.getFrom(),
               callbackQuery.getMessage().getChat(), null);
-        } else if ("/test_incorrect".equals(callbackData)) {
+        } else if ("/test_incorrect1".equals(callbackData) || "/test_incorrect2".equals(callbackData)
+        || "/test_incorrect3".equals(callbackData) || "/test_incorrect4".equals(callbackData)) {
           quizHandler.incorrectAnswer(this, callbackQuery.getFrom(),
               callbackQuery.getMessage().getChat(), null);
         }

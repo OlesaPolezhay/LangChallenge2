@@ -101,7 +101,7 @@ public class QuizHandler extends BotCommand {
     inlineKeyboardButton1.setText(options.get(0));
     inlineKeyboardButton1.setCallbackData(
         Objects.equals(options.get(0), question.getCorrectAnswer()) ? "/test_correct"
-            : "/test_incorrect"
+            : "/test_incorrect1"
     );
     rowInline1.add(inlineKeyboardButton1);
 
@@ -111,7 +111,7 @@ public class QuizHandler extends BotCommand {
     inlineKeyboardButton2.setText(options.get(1));
     inlineKeyboardButton2.setCallbackData(
         Objects.equals(options.get(1), question.getCorrectAnswer()) ? "/test_correct"
-            : "/test_incorrect"
+            : "/test_incorrect2"
     );
     rowInline2.add(inlineKeyboardButton2);
 
@@ -121,7 +121,7 @@ public class QuizHandler extends BotCommand {
     inlineKeyboardButton3.setText(options.get(2));
     inlineKeyboardButton3.setCallbackData(
         Objects.equals(options.get(2), question.getCorrectAnswer()) ? "/test_correct"
-            : "/test_incorrect"
+            : "/test_incorrect3"
     );
     rowInline3.add(inlineKeyboardButton3);
 
@@ -131,7 +131,7 @@ public class QuizHandler extends BotCommand {
     inlineKeyboardButton4.setText(options.get(3));
     inlineKeyboardButton4.setCallbackData(
         Objects.equals(options.get(3), question.getCorrectAnswer()) ? "/test_correct"
-            : "/test_incorrect"
+            : "/test_incorrect4"
     );
     rowInline4.add(inlineKeyboardButton4);
 
