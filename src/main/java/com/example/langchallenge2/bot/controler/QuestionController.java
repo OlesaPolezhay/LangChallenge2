@@ -15,4 +15,12 @@ public class QuestionController {
   public Question getRandomQuestion(){
    return questionRepository.getRandomQuestion();
   }
+
+  public Integer getCountQuestionInDay(int day){
+    return questionRepository.getCountQuestionInDay(day);
+  }
+ public Question getQuestionInDay(int day, int numberQuestion){
+    return questionRepository.getQuestionInDay(day, numberQuestion);
+  }
+
 }

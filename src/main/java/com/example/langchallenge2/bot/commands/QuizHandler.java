@@ -40,15 +40,53 @@ public class QuizHandler extends BotCommand {
 
   @Override
   public void execute(AbsSender absSender, User user, Chat chat, String[] strings) {
-    Question question = questionController.getRandomQuestion();
-    //SendMessage message = new SendMessage(chat.getId().toString(), "ojfd");
 
     com.example.langchallenge2.bot.model.User user1 = new com.example.langchallenge2.bot.model.User(
-       user.getId(), chat.getFirstName());
+        user.getId(), chat.getFirstName());
+
+    int day_number = userController.getDayByChatId(chat.getId());
+    userController.incrementQuestionNumber(user1);
+    int question_number = userController.getQuestionNumberByChartIc(chat.getId());
+    int count_question = questionController.getCountQuestionInDay(day_number);
+
+    if (question_number <= count_question) {
+      Question question = questionController.getQuestionInDay(day_number, question_number);
+      try {
+        if (question.getSticker() != null) {
+          InputFile sticker = new InputFile(question.getSticker());
+          absSender.execute(new SendSticker(chat.getId().toString(), sticker));
+        } else if (question.getPicture() != null) {
+
+          InputFile photo = new InputFile(new File(question.getPicture()));
+          SendPhoto sendPhoto = new SendPhoto(chat.getId().toString(), photo);
+          absSender.execute(sendPhoto);
+        }
+        absSender.execute(sendQuestion(chat.getId().toString(), question));
+      } catch (TelegramApiException e) {
+        e.printStackTrace();
+      }
+    }
+    else {
+      try {
+        printTheTestResult(absSender, user, chat);
+      } catch (TelegramApiException e) {
+        throw new RuntimeException(e);
+      }
+    }
+
+
+    /*Question question = questionController.getQuestionInDay(1, 1);
+    //SendMessage message = new SendMessage(chat.getId().toString(), "ojfd");
+
+
+
+
 
     userController.incrementScore(user1);
 
-    try {
+    System.out.println(questionController.getCountQuestionInDay(1));*/
+
+    /*try {
       if (question.getSticker() != null) {
         InputFile sticker = new InputFile(question.getSticker());
         absSender.execute(new SendSticker(chat.getId().toString(), sticker));
@@ -61,7 +99,7 @@ public class QuizHandler extends BotCommand {
       absSender.execute(sendQuestion(chat.getId().toString(), question));
     } catch (TelegramApiException e) {
       e.printStackTrace();
-    }
+    }*/
   }
 
   public SendMessage sendQuestion(String chatId, Question question) {
@@ -143,6 +181,18 @@ public class QuizHandler extends BotCommand {
 
   public void incorrectAnswer(AbsSender absSender, User user, Chat chat, String[] strings)
       throws TelegramApiException {
+    /*com.example.langchallenge2.bot.model.User user1 = new com.example.langchallenge2.bot.model.User(
+        user.getId(), chat.getFirstName());
+
+    int score = userController.getScoreByChatId(user1.getChatId());
+    int day = userController.getDayByChatId(user1.getChatId());*/
+
+    execute(absSender, user, chat, strings);
+  }
+
+  public void printTheTestResult(AbsSender absSender, User user, Chat chat)
+      throws TelegramApiException {
+
     com.example.langchallenge2.bot.model.User user1 = new com.example.langchallenge2.bot.model.User(
         user.getId(), chat.getFirstName());
 
@@ -151,18 +201,18 @@ public class QuizHandler extends BotCommand {
     String resultText = MessageTest.ResultMessage + score;
 
     InputFile sticker;
-    if (score <= 5){
+    if (score <= 2){
       sticker = new InputFile(MessageTest.StickerBadResult);
-      resultText = resultText + MessageTest.MessageBadResult;
-    } else if (score <= 10){
+      resultText +=  MessageTest.MessageBadResult;
+    } else if (score == 3){
       sticker = new InputFile(MessageTest.StickerGoodResult);
-      resultText = resultText + MessageTest.MessageGoodResult;
-    }else if (score <= 15){
+      resultText +=  MessageTest.MessageGoodResult;
+    }else if (score == 4){
       sticker = new InputFile(MessageTest.StickerVeryGoodResult);
-      resultText = resultText + MessageTest.MessageVeryGoodResult;
+      resultText += MessageTest.MessageVeryGoodResult;
     }else {
       sticker = new InputFile(MessageTest.StickerAmazingResult);
-      resultText = resultText + MessageTest.MessageAmazingResult;
+      resultText += MessageTest.MessageAmazingResult;
     }
 
     absSender.execute(new SendMessage(chat.getId().toString(), resultText));
