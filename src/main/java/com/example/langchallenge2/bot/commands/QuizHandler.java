@@ -20,7 +20,10 @@ import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -199,12 +202,39 @@ public class QuizHandler extends BotCommand {
       resultText += MessageTest.MessageAmazingResult;
     }
 
+
     absSender.execute(new SendMessage(chat.getId().toString(), resultText));
     absSender.execute(new SendSticker(chat.getId().toString(), sticker));
+
+    navigateNextOrRetry(absSender, user, chat);
+
   }
 
-   public void navigateNextOrRetry(String chatId){
+   public void navigateNextOrRetry(AbsSender absSender, User user, Chat chat)
+       throws TelegramApiException {
 
+     SendMessage messageTheory;
+     messageTheory = new SendMessage(chat.getId().toString(),
+        MessageTest.MessageChooseButton);
+     ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
+     List<KeyboardRow> keyboard = new ArrayList<>();
+     KeyboardRow row = new KeyboardRow();
+     KeyboardButton button = new KeyboardButton(MessageTest.MessageTryAgain);
+     KeyboardButton button2 = new KeyboardButton(MessageTest.MessageStartNewLesson);
+     row.add(button);
+     row.add(button2);
+     keyboard.add(row);
+     keyboardMarkup.setKeyboard(List.of(keyboard.toArray(new KeyboardRow[keyboard.size()])));
+     messageTheory.setReplyMarkup(keyboardMarkup);
+     absSender.execute(messageTheory);
+   }
+
+   public void resetTest (AbsSender absSender, User user, Chat chat, String[] strings){
+     com.example.langchallenge2.bot.model.User user1 = new com.example.langchallenge2.bot.model.User(
+         user.getId(), chat.getFirstName());
+    userController.resetScore(user1);
+    userController.resetQuestionNumber(user1);
+    execute(absSender, user, chat, strings);
    }
 }
 

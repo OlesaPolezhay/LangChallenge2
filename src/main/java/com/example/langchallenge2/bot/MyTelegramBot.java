@@ -45,6 +45,11 @@ public class MyTelegramBot extends TelegramLongPollingCommandBot {
       if(messageText.equals(MessageTest.MessageButtonStartLesson)){
        startLessonHandler.execute(this, update.getMessage().getFrom() ,update.getMessage().getChat(), null);
       }
+      if(messageText.equals(MessageTest.MessageTryAgain)){
+        quizHandler.resetTest(this, update.getMessage().getFrom() ,update.getMessage().getChat(), null);
+      }if(messageText.equals(MessageTest.MessageStartNewLesson)){
+        quizHandler.resetTest(this, update.getMessage().getFrom() ,update.getMessage().getChat(), null);
+      }
     }
     if (update.hasCallbackQuery()) {
       CallbackQuery callbackQuery = update.getCallbackQuery();

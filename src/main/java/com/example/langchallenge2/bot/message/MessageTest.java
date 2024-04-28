@@ -40,7 +40,8 @@ public class MessageTest {
 
   public static final String MessageButtonStartTest = "Почати тест";
   public static final String MessageButtonStartLesson = "Почати урок";
-
   public static final String MessageNotAvailableLesson = "На разі немає нових випробувань";
-
+  public static final String MessageChooseButton = "Обери дію";
+  public static final String MessageTryAgain = "Пройти тест ще раз";
+  public static final String MessageStartNewLesson = "Перейти до наступного уроку";
 }
