@@ -203,5 +203,8 @@ public class QuizHandler extends BotCommand {
     absSender.execute(new SendSticker(chat.getId().toString(), sticker));
   }
 
+   public void navigateNextOrRetry(String chatId){
+
+   }
 }
 

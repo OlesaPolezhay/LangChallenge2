@@ -1,5 +1,6 @@
 package com.example.langchallenge2.bot.commands;
 
+import com.example.langchallenge2.bot.controler.QuestionController;
 import com.example.langchallenge2.bot.controler.UserController;
 import com.example.langchallenge2.bot.message.MessageTest;
 import java.util.ArrayList;
@@ -21,11 +22,13 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 public class StartLessonHandler extends BotCommand {
 
   private final UserController userController;
+  private final QuestionController questionController;
 
   public StartLessonHandler(@Value(MessageTest.StartLesson) String commandIdentifier, @Value("") String description,
-      UserController userController) {
+      UserController userController, QuestionController questionController) {
     super(commandIdentifier, description);
     this.userController = userController;
+    this.questionController = questionController;
   }
 
   @Override
@@ -36,7 +39,9 @@ public class StartLessonHandler extends BotCommand {
         user.getId(), chat.getFirstName());
     userController.incrementDay(user1);
 
-    if(user1.getDayNumber() == 0) {
+    int lesson = userController.getDayByChatId(chat.getId());
+
+    if(questionController.getCountQuestionInDay(lesson) != 0) {
       messageTheory = new SendMessage(chat.getId().toString(),
           MessageTest.MessageTheoryForTheFirstLesson);
       ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
