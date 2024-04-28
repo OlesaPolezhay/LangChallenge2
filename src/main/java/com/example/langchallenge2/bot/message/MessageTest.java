@@ -14,7 +14,8 @@ public class MessageTest {
 
   public static final String CorrectAnswer = "Вірна відповідь! ✅";
 
-  public static final String IncorrectAnswer = "На жаль це помилка ❌";
+  public static final String IncorrectAnswer = "На жаль це помилка ❌ \n\n";
+  public static final String IncorrectAnswer2 = "Вірна відповідь: ";
 
   public static final String ResultMessage = "Ваш результат: ";
   public static final String StickerAmazingResult = "CAACAgIAAxkBAAEE-3ZmKlllhAN1UXiytRkbWQmzbjPZoQACsQADUomRIz3MSWUEgKd-NAQ";

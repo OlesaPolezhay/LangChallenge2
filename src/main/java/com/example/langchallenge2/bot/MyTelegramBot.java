@@ -57,7 +57,6 @@ public class MyTelegramBot extends TelegramLongPollingCommandBot {
           quizHandler.correctAnswer(this, callbackQuery.getFrom(),
               callbackQuery.getMessage().getChat(), null);
         } else if ("/test_incorrect".equals(callbackData)) {
-          execute(new SendMessage(chatId.toString(), MessageTest.IncorrectAnswer));
           quizHandler.incorrectAnswer(this, callbackQuery.getFrom(),
               callbackQuery.getMessage().getChat(), null);
         }

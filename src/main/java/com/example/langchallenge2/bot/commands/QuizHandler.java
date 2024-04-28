@@ -73,33 +73,6 @@ public class QuizHandler extends BotCommand {
         throw new RuntimeException(e);
       }
     }
-
-
-    /*Question question = questionController.getQuestionInDay(1, 1);
-    //SendMessage message = new SendMessage(chat.getId().toString(), "ojfd");
-
-
-
-
-
-    userController.incrementScore(user1);
-
-    System.out.println(questionController.getCountQuestionInDay(1));*/
-
-    /*try {
-      if (question.getSticker() != null) {
-        InputFile sticker = new InputFile(question.getSticker());
-        absSender.execute(new SendSticker(chat.getId().toString(), sticker));
-      } else if (question.getPicture() != null) {
-
-        InputFile photo = new InputFile(new File(question.getPicture()));
-        SendPhoto sendPhoto = new SendPhoto(chat.getId().toString(), photo);
-        absSender.execute(sendPhoto);
-      }
-      absSender.execute(sendQuestion(chat.getId().toString(), question));
-    } catch (TelegramApiException e) {
-      e.printStackTrace();
-    }*/
   }
 
   public SendMessage sendQuestion(String chatId, Question question) {
@@ -181,11 +154,19 @@ public class QuizHandler extends BotCommand {
 
   public void incorrectAnswer(AbsSender absSender, User user, Chat chat, String[] strings)
       throws TelegramApiException {
-    /*com.example.langchallenge2.bot.model.User user1 = new com.example.langchallenge2.bot.model.User(
+    com.example.langchallenge2.bot.model.User user1 = new com.example.langchallenge2.bot.model.User(
         user.getId(), chat.getFirstName());
 
-    int score = userController.getScoreByChatId(user1.getChatId());
-    int day = userController.getDayByChatId(user1.getChatId());*/
+    int day_number = userController.getDayByChatId(chat.getId());
+    int question_number = userController.getQuestionNumberByChartIc(chat.getId());
+
+    Question question = questionController.getQuestionInDay(day_number, question_number);
+
+    String correctAnswer =MessageTest.IncorrectAnswer + MessageTest.IncorrectAnswer2 + question.getCorrectAnswer();
+
+    SendMessage sendMessage = new SendMessage(chat.getId().toString(),
+        correctAnswer);
+    absSender.execute(sendMessage);
 
     execute(absSender, user, chat, strings);
   }
@@ -197,6 +178,9 @@ public class QuizHandler extends BotCommand {
         user.getId(), chat.getFirstName());
 
     int score = userController.getScoreByChatId(user1.getChatId());
+
+    userController.resetScore(user1);
+    userController.resetQuestionNumber(user1);
 
     String resultText = MessageTest.ResultMessage + score;
 
