@@ -18,6 +18,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.methods.send.SendSticker;
 import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
+import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
@@ -58,7 +59,7 @@ public class QuizHandler extends BotCommand {
       sendMessage.enableHtml(true);
       try {
         absSender.execute(sendMessage);
-        Thread.sleep(3000);
+        Thread.sleep(2000);
       } catch (TelegramApiException | InterruptedException e) {
         throw new RuntimeException(e);
       }
@@ -246,6 +247,7 @@ public class QuizHandler extends BotCommand {
     row.add(button2);
     keyboard.add(row);
     keyboardMarkup.setKeyboard(List.of(keyboard.toArray(new KeyboardRow[keyboard.size()])));
+    //keyboardMarkup.setOneTimeKeyboard(true);
     messageTheory.setReplyMarkup(keyboardMarkup);
     absSender.execute(messageTheory);
   }
@@ -289,5 +291,6 @@ public class QuizHandler extends BotCommand {
       throw new RuntimeException(e);
     }
   }
+
 }
 

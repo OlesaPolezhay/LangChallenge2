@@ -48,7 +48,7 @@ public class StartLessonHandler extends BotCommand {
       sendMessage2.enableHtml(true);
       try {
         absSender.execute(sendMessage);
-        Thread.sleep(3000);
+        Thread.sleep(1000);
         absSender.execute(sendMessage2);
       } catch (TelegramApiException | InterruptedException e) {
         throw new RuntimeException(e);
@@ -64,6 +64,7 @@ public class StartLessonHandler extends BotCommand {
       row.add(button);
       keyboard.add(row);
       keyboardMarkup.setKeyboard(keyboard);
+      //keyboardMarkup.setOneTimeKeyboard(true);
       messageTheory.setReplyMarkup(keyboardMarkup);
     }
     else{

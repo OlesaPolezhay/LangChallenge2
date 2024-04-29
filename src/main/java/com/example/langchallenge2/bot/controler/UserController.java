@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class UserController {
+
   private final UserRepository userRepository;
 
   public UserController(UserRepository userRepository) {
@@ -60,7 +61,7 @@ public class UserController {
       existingUser.setDayNumber(existingUser.getDayNumber() + 1);
       existingUser.setQuestionNumber(0);
       existingUser.setScore(0);
-       userRepository.save(existingUser);
+      userRepository.save(existingUser);
     } else {
       userRepository.save(user);
     }
@@ -78,7 +79,7 @@ public class UserController {
   }
 
   public int getQuestionNumberByChartIc(long chatId) {
-    Optional<User> userOptional = userRepository.findByChatId( chatId);
+    Optional<User> userOptional = userRepository.findByChatId(chatId);
     if (userOptional.isPresent()) {
       User user = userOptional.get();
       return user.getQuestionNumber();
@@ -89,7 +90,7 @@ public class UserController {
   }
 
   public int getScoreByChatId(long chatId) {
-    Optional<User> userOptional = userRepository.findByChatId( chatId);
+    Optional<User> userOptional = userRepository.findByChatId(chatId);
     if (userOptional.isPresent()) {
       User user = userOptional.get();
       return user.getScore();
@@ -100,7 +101,7 @@ public class UserController {
   }
 
   public int getDayByChatId(long chatId) {
-    Optional<User> userOptional = userRepository.findByChatId( chatId);
+    Optional<User> userOptional = userRepository.findByChatId(chatId);
     if (userOptional.isPresent()) {
       User user = userOptional.get();
       return user.getDayNumber();

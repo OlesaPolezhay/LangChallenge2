@@ -53,7 +53,7 @@ public class StartCommandHandler extends BotCommand
     keyboard.add(row);
 
     keyboardMarkup.setKeyboard(keyboard);
-
+    //keyboardMarkup.setOneTimeKeyboard(true);
     sendMessageWelcome.setReplyMarkup(keyboardMarkup);
 
     try {
