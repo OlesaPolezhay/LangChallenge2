@@ -203,20 +203,22 @@ public class QuizHandler extends BotCommand {
         user.getId(), chat.getFirstName());
 
     int score = userController.getScoreByChatId(user1.getChatId());
+    int lesson = userController.getDayByChatId(chat.getId());
+    int countQuestion = questionController.getCountQuestionInDay(lesson);
 
     userController.resetScore(user1);
     userController.resetQuestionNumber(user1);
 
-    String resultText = MessageTest.ResultMessage + score;
-
+    String resultText = MessageTest.ResultMessage + score + " з " + countQuestion;
+    float accuracy = (float) score / countQuestion;
     InputFile sticker;
-    if (score <= 2) {
+    if (accuracy < 0.35) {
       sticker = new InputFile(MessageTest.StickerBadResult);
       resultText += MessageTest.MessageBadResult;
-    } else if (score == 3) {
+    } else if (accuracy < 0.55) {
       sticker = new InputFile(MessageTest.StickerGoodResult);
       resultText += MessageTest.MessageGoodResult;
-    } else if (score == 4) {
+    } else if (accuracy < 0.8) {
       sticker = new InputFile(MessageTest.StickerVeryGoodResult);
       resultText += MessageTest.MessageVeryGoodResult;
     } else {
