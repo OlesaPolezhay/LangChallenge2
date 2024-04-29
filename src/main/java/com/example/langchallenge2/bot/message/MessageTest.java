@@ -39,6 +39,26 @@ public class MessageTest {
       + "<i> кухонна шафа</i>"
       + "*Коли слово складається з двох або більше іменників, між визначником та основним словом іноді вставляється звук. Після -e (наприклад, у слові Küche) це часто буває -n. У багатьох випадках використовуєтья -s, іноді також -es, -ens або -er.";
 
+  public static final String MessageTheoryForTheSecondLesson = "<b>Weg VS LOS</b>\n"
+      + "\n"
+      + "1.Прислівник <b>WEG</b> в німецькій мові використовується для висловлення відсутності чогось або когось у певному місці (напр. у разі втрати речі чи від'їзду\n"
+      + "людини). \n"
+      + "2. Також він може бути просто скороченням дієслів weggehen/wegfahren (піти/поїхати):\n"
+      + "\n"
+      + "<i>Mist, meine Tasche ist weg! (Блін, моя сумка загубилася! / Блін, моєї сумки немає!)</i>\n"
+      + "\n"
+      + "<i>Ich muss leider weg. (На жаль, мені час/ треба піти.)</i>\n"
+      + "\n"
+      + "1.Прислівник LOS має таке ж значення, як і WEG у  другому випадку. Воно може бути скороченням дієслів losgehen/losfahren (вирушити):\n"
+      + "\n"
+      + "<i>Ich muss leider los. (На жаль, мені час/ потрібно піти.)</i>";
+
+
+  public static final String MessageTheoryForTheSecondLesson2 =
+       "1.Прислівник LOS має таке ж значення, як і WEG у  другому випадку. Воно може бути скороченням дієслів losgehen/losfahren (вирушити):\n"
+      + "\n"
+      + "<i>Ich muss leider los. (На жаль, мені час/ потрібно піти.)</i>";
+
   public static final String MessageButtonStartTest = "Почати тест";
 
   public static final String MessageStartTest = "Для початку тестування натисніть на кнопку";

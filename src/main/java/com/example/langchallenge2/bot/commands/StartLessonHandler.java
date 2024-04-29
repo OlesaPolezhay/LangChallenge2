@@ -42,18 +42,37 @@ public class StartLessonHandler extends BotCommand {
 
     if(questionController.getCountQuestionInDay(lesson + 1) != 0) {
       userController.incrementDay(user1);
-      SendMessage sendMessage = new SendMessage(chat.getId().toString(), MessageTest.MessageTheoryForTheFirstLesson);
-      sendMessage.enableHtml(true);
-      SendMessage sendMessage2 = new SendMessage(chat.getId().toString(), MessageTest.MessageTheoryForTheFirstLesson2);
-      sendMessage2.enableHtml(true);
-      try {
-        absSender.execute(sendMessage);
-        Thread.sleep(1000);
-        absSender.execute(sendMessage2);
-      } catch (TelegramApiException | InterruptedException e) {
-        throw new RuntimeException(e);
+       lesson = userController.getDayByChatId(chat.getId());
+       if(lesson == 1) {
+         SendMessage sendMessage = new SendMessage(chat.getId().toString(),
+             MessageTest.MessageTheoryForTheFirstLesson);
+         sendMessage.enableHtml(true);
+         SendMessage sendMessage2 = new SendMessage(chat.getId().toString(),
+             MessageTest.MessageTheoryForTheFirstLesson2);
+         sendMessage2.enableHtml(true);
+         try {
+           absSender.execute(sendMessage);
+           Thread.sleep(1000);
+           absSender.execute(sendMessage2);
+         } catch (TelegramApiException | InterruptedException e) {
+           throw new RuntimeException(e);
+         }
+       }
+      else if(lesson == 2) {
+        SendMessage sendMessageLesson2Part1 = new SendMessage(chat.getId().toString(),
+            MessageTest.MessageTheoryForTheSecondLesson);
+        sendMessageLesson2Part1.enableHtml(true);
+        SendMessage sendMessageLesson2Part2 = new SendMessage(chat.getId().toString(),
+            MessageTest.MessageTheoryForTheSecondLesson2);
+        sendMessageLesson2Part2.enableHtml(true);
+        try {
+          absSender.execute(sendMessageLesson2Part1);
+          Thread.sleep(1000);
+          absSender.execute(sendMessageLesson2Part2);
+        } catch (TelegramApiException | InterruptedException e) {
+          throw new RuntimeException(e);
+        }
       }
-
       messageTheory = new SendMessage(chat.getId().toString(),
           MessageTest.MessageStartTest);
       ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
