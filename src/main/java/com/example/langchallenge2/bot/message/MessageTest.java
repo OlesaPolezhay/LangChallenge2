@@ -65,4 +65,15 @@ public class MessageTest {
   public static final String MessageStartNewLesson = "Перейти до наступного уроку";
   public static final String MessageQuestionForFirstDays = "Утвори правильний <b>Коmposita</b> з двох іменників. \n"
       + "PS. Що означає це слово ти відразу побачиш на картинці. <i>Viel Spaß</i> \uD83D\uDE09";
+
+  public static final String MessageAddTheory = "Додати теорію";
+  public static final String MessageAddTests = "Додати тести";
+
+  //public static final String MessageAddMaterials = "Надішліть файл з назвою theory.xlsx або tests.xlsx ";
+
+  public static final String MessageAddMaterials =
+      "Надішліть дані у форматі: \n"
+      + "daynumber: 1, \n"
+      + "msgnumber: 1, \n"
+          + "theory: \" Hallo \"";
 }
