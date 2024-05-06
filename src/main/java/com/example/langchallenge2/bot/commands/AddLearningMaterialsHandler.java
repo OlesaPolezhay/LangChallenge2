@@ -38,7 +38,8 @@ public class AddLearningMaterialsHandler extends BotCommand {
     }
   }
 
-  public void addTheory (AbsSender absSender, User user, Chat chat, String message){
+  public void addTheory (AbsSender absSender, User user, Chat chat, String message)
+      throws TelegramApiException {
 
     String[] parts = message.split(",\n");
 
@@ -61,9 +62,11 @@ public class AddLearningMaterialsHandler extends BotCommand {
     }
 
     if (dayNumber != 0 || msgNumber != 0 || theory.isEmpty() ) {
-      if (theoryController.checkData(dayNumber, msgNumber) == 0) {
+      if (theoryController.checkData(dayNumber, msgNumber) == 0)
         theoryController.setTheory(dayNumber, msgNumber, theory);
-      }
+      else
+        absSender.execute(new SendMessage(chat.getId().toString(), MessageTest.MessageAddTheoryError));
     }
+    else absSender.execute(new SendMessage(chat.getId().toString(), MessageTest.MessageAddTheoryError2));
   }
 }
