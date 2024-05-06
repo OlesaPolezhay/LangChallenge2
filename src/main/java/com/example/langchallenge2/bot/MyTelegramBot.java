@@ -61,6 +61,13 @@ public class MyTelegramBot extends TelegramLongPollingCommandBot {
           throw new RuntimeException(e);
         }
       }
+      if(messageText.contains("option1")){
+        try {
+          addLearningMaterialsHandler.addTest(this, update.getMessage().getFrom() ,update.getMessage().getChat(), messageText);
+        } catch (TelegramApiException e) {
+          throw new RuntimeException(e);
+        }
+      }
     }
     if (update.hasCallbackQuery()) {
       CallbackQuery callbackQuery = update.getCallbackQuery();

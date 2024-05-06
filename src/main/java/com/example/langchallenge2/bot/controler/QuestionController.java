@@ -23,4 +23,12 @@ public class QuestionController {
     return questionRepository.getQuestionInDay(day, numberQuestion);
   }
 
+  public void setQuestion(Question question){
+    questionRepository.save(question);
+  }
+
+  public int checkQuestion (int day, int numberQuestion){
+    return questionRepository.checkQuestion( day, numberQuestion);
+  }
+
 }

@@ -73,8 +73,17 @@ public class MessageTest {
   //public static final String MessageAddMaterials = "Надішліть файл з назвою theory.xlsx або tests.xlsx ";
 
   public static final String MessageAddMaterials =
-      "Надішліть дані у форматі: \n"
-      + "daynumber: 1, \n"
-      + "msgnumber: 1, \n"
-          + "theory: \" Hallo \"";
-}
+      "Надішліть дані у форматі: \n\n" +
+          "daynumber   : 1; \n" +
+          "msgnumber  : 1; \n" +
+          "theory             : \" Hallo \" \n " +
+          "\nАбо \n\n" +
+          "\"question\"                   : \"Вставте пропущені слова\";\n" +
+          "\"sticker\"                       : \"CAACAg\";\n" +
+          "\"answer_correct\"      : \"weg, weg\";\n" +
+          "\"option1\"                     : \"weg, los\";\n" +
+          "\"option2\"                     : \"los, weg\";\n" +
+          "\"option3\"                     : \"los, los\";\n" +
+          "\"day_number\"            : 2;\n" +
+          "\"question_number\"  : 3";
+  }

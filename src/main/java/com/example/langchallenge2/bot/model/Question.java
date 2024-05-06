@@ -53,6 +53,10 @@ public class Question {
   @NotBlank
   private Integer questionNumber;
 
+  public Question() {
+
+  }
+
   @Override
   public String toString() {
     return "Question{" +
@@ -67,5 +71,17 @@ public class Question {
         ", dayNumber=" + dayNumber +
         ", questionNumber=" + questionNumber +
         '}';
+  }
+
+  public Question(String question, String sticker, String correctAnswer, String optionOne,
+      String optionTwo, String optionThree, Integer dayNumber, Integer questionNumber) {
+    this.question = question;
+    this.sticker = sticker;
+    this.correctAnswer = correctAnswer;
+    this.optionOne = optionOne;
+    this.optionTwo = optionTwo;
+    this.optionThree = optionThree;
+    this.dayNumber = dayNumber;
+    this.questionNumber = questionNumber;
   }
 }
