@@ -83,7 +83,7 @@ public class StartLessonHandler extends BotCommand {
       row.add(button);
       keyboard.add(row);
       keyboardMarkup.setKeyboard(keyboard);
-      //keyboardMarkup.setOneTimeKeyboard(true);
+      keyboardMarkup.setOneTimeKeyboard(true);
       messageTheory.setReplyMarkup(keyboardMarkup);
     }
     else{

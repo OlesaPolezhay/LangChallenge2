@@ -9,6 +9,4 @@ import org.springframework.data.repository.CrudRepository;
 public interface UserRepository  extends JpaRepository<User, Integer> {
   Optional<User> findByChatId(Long chatId);
 
-
-
 }

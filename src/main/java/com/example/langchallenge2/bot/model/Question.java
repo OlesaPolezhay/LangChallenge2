@@ -68,9 +68,4 @@ public class Question {
         ", questionNumber=" + questionNumber +
         '}';
   }
-
-  public void question (Question question){
-    this.question = question.getQuestion();
-
-  }
 }

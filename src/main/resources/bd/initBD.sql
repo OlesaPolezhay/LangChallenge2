@@ -28,3 +28,11 @@ CREATE TABLE lang_quiz
     unique (day_number, question_number)
 );
 
+CREATE TABLE theory
+(
+	dayNumber      INTEGER NOT NULL,
+	theory        VARCHAR NOT NULL,
+	msgNumber      INTEGER NOT NULL,
+	UNIQUE(dayNumber, theory, msgNumber)
+)
+
