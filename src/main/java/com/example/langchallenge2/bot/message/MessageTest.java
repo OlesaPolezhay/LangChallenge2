@@ -32,12 +32,13 @@ public class MessageTest {
       + "<b>Сьогодні я поясню тобі тему Komposita</b>\n"
       + "<i>Прочитай правило, це займе лише 3 хвилинки твого часу, а потім тебе чекають цікаві тести</i> ✨\n";
 
-  public static final String MessageTheoryForTheFirstLesson2 = "\uD83D\uDCCCKomposita є складними іменниками у німецькій мові, що утворюються шляхом поєднання двох або більше іменників для створення нового слова з відмінним значенням. Кожен композит складається з головного слова, розташованого в кінці, яке визначає основний зміст новоутвореного слова, та одного або декількох визначників, які деталізують головне слово. Артикль композиту визначається за артиклем головного слова.\n"
-      + "Наприклад:\n"
-      + "<i> die Küche + der Schrank:</i>\n"
-      + "<i> der Küchenschrank*</i>\n"
-      + "<i> кухонна шафа</i>"
-      + "*Коли слово складається з двох або більше іменників, між визначником та основним словом іноді вставляється звук. Після -e (наприклад, у слові Küche) це часто буває -n. У багатьох випадках використовуєтья -s, іноді також -es, -ens або -er.";
+  public static final String MessageTheoryForTheFirstLesson2 =
+      "\uD83D\uDCCCKomposita є складними іменниками у німецькій мові, що утворюються шляхом поєднання двох або більше іменників для створення нового слова з відмінним значенням. Кожен композит складається з головного слова, розташованого в кінці, яке визначає основний зміст новоутвореного слова, та одного або декількох визначників, які деталізують головне слово. Артикль композиту визначається за артиклем головного слова.\n"
+          + "Наприклад:\n"
+          + "<i> die Küche + der Schrank:</i>\n"
+          + "<i> der Küchenschrank*</i>\n"
+          + "<i> кухонна шафа</i>"
+          + "*Коли слово складається з двох або більше іменників, між визначником та основним словом іноді вставляється звук. Після -e (наприклад, у слові Küche) це часто буває -n. У багатьох випадках використовуєтья -s, іноді також -es, -ens або -er.";
 
   public static final String MessageTheoryForTheSecondLesson = "<b>WEG</b> vs <b>LOS</b>\n"
       + "\n"
@@ -51,9 +52,9 @@ public class MessageTest {
 
 
   public static final String MessageTheoryForTheSecondLesson2 =
-       "1⃣  Прислівник <b>LOS</b> має таке ж значення, як і <b>WEG</b> у  другому випадку. Воно може бути скороченням дієслів <i> losgehen/losfahren (вирушити):</i>\n"
-           + "\n"
-           + "<i>Ich muss leider los. (На жаль, мені потрібно йти.)</i>";
+      "1⃣  Прислівник <b>LOS</b> має таке ж значення, як і <b>WEG</b> у  другому випадку. Воно може бути скороченням дієслів <i> losgehen/losfahren (вирушити):</i>\n"
+          + "\n"
+          + "<i>Ich muss leider los. (На жаль, мені потрібно йти.)</i>";
 
   public static final String MessageButtonStartTest = "Почати тест";
 
@@ -63,17 +64,16 @@ public class MessageTest {
   public static final String MessageChooseButton = "Обери дію";
   public static final String MessageTryAgain = "Пройти тест ще раз";
   public static final String MessageStartNewLesson = "Перейти до наступного уроку";
-  public static final String MessageQuestionForFirstDays = "Утвори правильний <b>Коmposita</b> з двох іменників. \n"
-      + "PS. Що означає це слово ти відразу побачиш на картинці. <i>Viel Spaß</i> \uD83D\uDE09";
+  public static final String MessageQuestionForFirstDays =
+      "Утвори правильний <b>Коmposita</b> з двох іменників. \n"
+          + "PS. Що означає це слово ти відразу побачиш на картинці. <i>Viel Spaß</i> \uD83D\uDE09";
 
   public static final String MessageAddTheoryError = "Ці дані вже було включено до уроку раніше";
   public static final String MessageAddTheoryError2 = "Дані введено не вірно.";
-  public static final String MessageAddTestsError = "Додати тести";
-
-  //public static final String MessageAddMaterials = "Надішліть файл з назвою theory.xlsx або tests.xlsx ";
+  public static final String MessageAddTheorySuccess = "Дані додано успішно";
 
   public static final String MessageAddMaterials =
-      "Надішліть дані у форматі: \n\n" +
+      "Для того щоб додати нові матеріали, надішліть дані у форматі: \n\n" +
           "daynumber   : 1; \n" +
           "msgnumber  : 1; \n" +
           "theory             : \" Hallo \" \n " +

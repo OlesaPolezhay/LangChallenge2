@@ -22,14 +22,14 @@ public class AddLearningMaterialsHandler extends BotCommand {
   private final TheoryController theoryController;
   private final QuestionController questionController;
 
-  public AddLearningMaterialsHandler(@Value("add_materials")String commandIdentifier,@Value("") String description,
+  public AddLearningMaterialsHandler(@Value("add_materials") String commandIdentifier,
+      @Value("") String description,
       TheoryController theoryController, TheoryRepository theoryRepository,
       TheoryController theoryController1, QuestionRepository questionRepository,
       QuestionController questionController) {
     super(commandIdentifier, description);
 
     this.theoryController = theoryController1;
-
     this.questionController = questionController;
   }
 
@@ -69,9 +69,11 @@ public class AddLearningMaterialsHandler extends BotCommand {
     }
 
     if (dayNumber != 0 || msgNumber != 0 || theory.isEmpty() ) {
-      if (theoryController.checkData(dayNumber, msgNumber) == 0)
+      if (theoryController.checkData(dayNumber, msgNumber) == 0) {
         theoryController.setTheory(dayNumber, msgNumber, theory);
-      else
+        absSender.execute(
+            new SendMessage(chat.getId().toString(), MessageTest.MessageAddTheorySuccess));
+      }else
         absSender.execute(new SendMessage(chat.getId().toString(), MessageTest.MessageAddTheoryError));
     }
     else absSender.execute(new SendMessage(chat.getId().toString(), MessageTest.MessageAddTheoryError2));
@@ -126,11 +128,15 @@ public class AddLearningMaterialsHandler extends BotCommand {
       }
     }
 
-    Question test = new Question(question, sticker, answerCorrect, option1, option2, option3, dayNumber, questionNumber);
-    if (questionController.checkQuestion(dayNumber, questionNumber) != 1)
-        questionController.setQuestion(test);
-    else
-      absSender.execute(new SendMessage(chat.getId().toString(), MessageTest.MessageAddTheoryError));
-
+    Question test = new Question(question, sticker, answerCorrect, option1, option2, option3,
+        dayNumber, questionNumber);
+    if (questionController.checkQuestion(dayNumber, questionNumber) != 1) {
+      questionController.setQuestion(test);
+      absSender.execute(
+          new SendMessage(chat.getId().toString(), MessageTest.MessageAddTheorySuccess));
+    } else {
+      absSender.execute(
+          new SendMessage(chat.getId().toString(), MessageTest.MessageAddTheoryError));
+    }
   }
 }
