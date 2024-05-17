@@ -33,15 +33,15 @@ public class Question {
   @NotBlank
   private String correctAnswer;
 
-  @Column(name = "option2", nullable = false)
+  @Column(name = "incorrect_answer_1", nullable = false)
   @NotBlank
   private String optionOne;
 
-  @Column(name = "option1", nullable = false)
+  @Column(name = "incorrect_answer_2", nullable = false)
   @NotBlank
   private String optionTwo;
 
-  @Column(name = "option3", nullable = false)
+  @Column(name = "incorrect_answer_3", nullable = false)
   @NotBlank
   private String optionThree;
 

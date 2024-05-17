@@ -50,7 +50,7 @@ public class User{
     this.name = String.valueOf(chatId);
     this.score = 0;
     this.highScore = 0;
-    this.botState = "start";
+    this.botState = "user";
     this.dayNumber = 0;
     this.questionNumber = 0;
   }
@@ -60,7 +60,7 @@ public class User{
     this.name = name;
     this.score = 0;
     this.highScore = 0;
-    this.botState = "start";
+    this.botState = "user";
     this.dayNumber = 0;
     this.questionNumber = 0;
   }

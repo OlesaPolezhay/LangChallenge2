@@ -25,7 +25,7 @@ public class Theory {
   @Column(name = "dayNumber")
   private Integer dayNumber;
 
-  @Column(name = "msgNumber ")
+  @Column(name = "msgNumber")
   private Integer msgNumber;
 
 }

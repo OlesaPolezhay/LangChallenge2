@@ -1,4 +1,4 @@
-INSERT INTO lang_quiz (question, sticker,  answer_correct, option1, option2, option3, day_number, question_number)
+INSERT INTO lang_quiz (question, sticker,  answer_correct, incorrect_answer_1, incorrect_answer_2, incorrect_answer_3, day_number, question_number)
 VALUES
     ('Утвори правильний Коmposita','CAACAgIAAxkBAAEFDtJmLqkCVBwsHVKFC2YedxP740NHTwACyFIAAtk_eElZntfPXE56BzQE','der Wasserhahn','das Wasserhahn','der Hahnwasser','das Hahnwasser', 1, 1),
     ('PS. Що означає це слово ти відразу побачиш на картинці. Viel Spaß 😉','CAACAgIAAxkBAAEFDtxmLqkKbPQNlJrVzbf7PoTSAlAcSAACIlIAAiDBcUmAsOW2Nz-XHTQE','der Löwenzahn','das Löwenzahn','der Löwezahn','die Löwenzahn',  1, 2),
@@ -6,7 +6,7 @@ VALUES
     ('PS. Що означає це слово ти відразу побачиш на картинці. Viel Spaß 😉','CAACAgIAAxkBAAEFDuBmLqkNGmgawlnnw4vWLuwDK6DFwwACy1IAAmCxeEnomca8eS8zFTQE','die Handschuhe','die Schuhenhand','die Händeschuhe','die Schuhehand',  1, 4),
     ('Утвори правильний Коmposita з двох іменників','CAACAgIAAxkBAAEFDuJmLqkP2HU7BTJ_qcffQVbVy4ZpyAACjEwAAmRFeEnNre7aXTt2rzQE','der Regenbogen','der Bogenregen','der Bogeregen','der Regebogen',  1, 5);
 
-INSERT INTO lang_quiz (question, sticker,  answer_correct, option1, option2, option3, day_number, question_number)
+INSERT INTO lang_quiz (question, sticker,  answer_correct, incorrect_answer_1, incorrect_answer_2, incorrect_answer_3, day_number, question_number)
 VALUES
     ('Яке з наступних речень правильно використовує прислівник "los"?', 'CAACAgIAAxkBAAEFEN9mL3UDcOWP0A_z0g9IW_4O9iePxgACpgADUomRI2u5KhCNt8e8NAQ','Wir müssen jetzt los, um pünktlich zu sein',  'Mein Hund ist los im Park', 'Mein Schlüssel ist los', 'Der Kuchen war schnell los', 2, 1),
     ('Заповніть пропуски у наступних реченнях використовуючи "weg" або "los":

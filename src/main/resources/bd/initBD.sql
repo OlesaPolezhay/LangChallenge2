@@ -20,19 +20,19 @@ CREATE TABLE lang_quiz
     picture        VARCHAR ,
     sticker        VARCHAR ,
     answer_correct VARCHAR NOT NULL,
-    option1        VARCHAR NOT NULL,
-    option2        VARCHAR NOT NULL,
-    option3        VARCHAR NOT NULL,
-    day_number      INTEGER DEFAULT 0,
+    incorrect_answer_1 VARCHAR NOT NULL,
+    incorrect_answer_2 VARCHAR NOT NULL,
+    incorrect_answer_3 VARCHAR NOT NULL,
+    day_number  INTEGER DEFAULT 0,
     question_number INTEGER DEFAULT 0,
     unique (day_number, question_number)
 );
 
 CREATE TABLE theory
 (
+  id             SERIAL PRIMARY KEY,
 	dayNumber      INTEGER NOT NULL,
-	theory        VARCHAR NOT NULL,
+	theory         VARCHAR NOT NULL,
 	msgNumber      INTEGER NOT NULL,
-	UNIQUE(dayNumber, theory, msgNumber)
-)
+	unique (dayNumber, msgNumber)
 

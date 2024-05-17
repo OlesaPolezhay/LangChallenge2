@@ -1,5 +1,6 @@
 package com.example.langchallenge2.bot.controler;
 
+import com.example.langchallenge2.bot.model.Theory;
 import com.example.langchallenge2.bot.repository.TheoryRepository;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,4 +20,7 @@ public class TheoryController {
     return theoryRepository.checkData(dayNumber, msgNumber);
   }
 
+  public Theory getQuestionInDay (Integer dayNumber, Integer msgNumber){
+    return  theoryRepository.getQuestionInDay(dayNumber, msgNumber);
+  }
 }

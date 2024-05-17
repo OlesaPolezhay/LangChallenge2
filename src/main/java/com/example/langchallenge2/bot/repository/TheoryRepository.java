@@ -1,5 +1,6 @@
 package com.example.langchallenge2.bot.repository;
 
+import com.example.langchallenge2.bot.model.Question;
 import com.example.langchallenge2.bot.model.Theory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -19,4 +20,7 @@ public interface TheoryRepository extends JpaRepository<Theory, Integer> {
   @Query(nativeQuery = true, value =
       "SELECT CASE WHEN EXISTS (SELECT 1 FROM theory WHERE dayNumber = :dayNumber AND msgNumber = :msgNumber) THEN 1 ELSE 0 END")
   int checkData(@Param("dayNumber") int dayNumber, @Param("msgNumber") int msgNumber);
+
+  @Query(nativeQuery = true, value = "SELECT * from theory where daynumber = :dayNumber AND msgNumber = :msgNumber")
+  Theory getQuestionInDay(@Param("dayNumber") int dayNumber,@Param("msgNumber") int msgNumber);
 }
