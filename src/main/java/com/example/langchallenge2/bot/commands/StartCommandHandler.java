@@ -43,7 +43,6 @@ public class StartCommandHandler extends BotCommand
 
     SendMessage sendMessageWelcome = new SendMessage(chat.getId().toString(), messageWelcome);
 
-    //Створюємо клавіатуру з однією кнопкою
     ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
     List<KeyboardRow> keyboard = new ArrayList<>();
     KeyboardRow row = new KeyboardRow();

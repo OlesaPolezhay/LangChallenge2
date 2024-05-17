@@ -18,7 +18,6 @@ import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.methods.send.SendSticker;
 import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
-import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
@@ -174,8 +173,6 @@ public class QuizHandler extends BotCommand {
 
   public void incorrectAnswer(AbsSender absSender, User user, Chat chat, String[] strings)
       throws TelegramApiException, InterruptedException {
-    com.example.langchallenge2.bot.model.User user1 = new com.example.langchallenge2.bot.model.User(
-        user.getId(), chat.getFirstName());
 
     int day_number = userController.getDayByChatId(chat.getId());
     int question_number = userController.getQuestionNumberByChartIc(chat.getId());
@@ -267,20 +264,25 @@ public class QuizHandler extends BotCommand {
     int question_number = userController.getQuestionNumberByChartIc(chat.getId());
 
     SendMessage sendMessage = new SendMessage(chat.getId().toString(), "Наступне питання");
-    if(question_number == 1){
-      InputFile sticker = new InputFile("CAACAgIAAxkBAAEFDtRmLqkF0jd-MwrvA2pcHs7O3BpdOAAC_0sAAoLncElPfNFAxETvszQE");
+    if (question_number == 1) {
+      InputFile sticker = new InputFile(
+          "CAACAgIAAxkBAAEFDtRmLqkF0jd-MwrvA2pcHs7O3BpdOAAC_0sAAoLncElPfNFAxETvszQE");
       absSender.execute(new SendSticker(chat.getId().toString(), sticker));
-    } else if (question_number == 2){
-      InputFile sticker = new InputFile("CAACAgIAAxkBAAEFDtZmLqkGCSqX2HwLImaUF1n1acZcaQACF1EAAtx0cEn-seKWchHvlTQE");
+    } else if (question_number == 2) {
+      InputFile sticker = new InputFile(
+          "CAACAgIAAxkBAAEFDtZmLqkGCSqX2HwLImaUF1n1acZcaQACF1EAAtx0cEn-seKWchHvlTQE");
       absSender.execute(new SendSticker(chat.getId().toString(), sticker));
-    } else if (question_number == 3){
-      InputFile sticker = new InputFile("CAACAgIAAxkBAAEFDthmLqkIOO4_JCnNYichu6e1RKeWjwACOEgAAsEjeEnUacqGVRqbjzQE");
+    } else if (question_number == 3) {
+      InputFile sticker = new InputFile(
+          "CAACAgIAAxkBAAEFDthmLqkIOO4_JCnNYichu6e1RKeWjwACOEgAAsEjeEnUacqGVRqbjzQE");
       absSender.execute(new SendSticker(chat.getId().toString(), sticker));
-    } else if (question_number == 4){
-      InputFile sticker = new InputFile("CAACAgIAAxkBAAEFDtpmLqkJtsVXSFGBAaDBB884v_UwLwACLUYAArGLeEmSKCGexAd8FTQE");
+    } else if (question_number == 4) {
+      InputFile sticker = new InputFile(
+          "CAACAgIAAxkBAAEFDtpmLqkJtsVXSFGBAaDBB884v_UwLwACLUYAArGLeEmSKCGexAd8FTQE");
       absSender.execute(new SendSticker(chat.getId().toString(), sticker));
-    } else if (question_number == 5){
-      InputFile sticker = new InputFile("CAACAgIAAxkBAAEFDuRmLqkRVIXSFEsRP4VzolQMoVSDagAC4U4AAi8ucElJc05gJAaItTQE");
+    } else if (question_number == 5) {
+      InputFile sticker = new InputFile(
+          "CAACAgIAAxkBAAEFDuRmLqkRVIXSFEsRP4VzolQMoVSDagAC4U4AAi8ucElJc05gJAaItTQE");
       absSender.execute(new SendSticker(chat.getId().toString(), sticker));
     }
 

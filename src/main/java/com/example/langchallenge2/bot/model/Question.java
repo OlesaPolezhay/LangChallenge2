@@ -13,6 +13,7 @@ import lombok.Getter;
 @Table(name = "lang_quiz")
 @Getter
 public class Question {
+
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;

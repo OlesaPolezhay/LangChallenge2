@@ -18,7 +18,6 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 @Component
 public class AddLearningMaterialsHandler extends BotCommand {
 
-
   private final TheoryController theoryController;
   private final QuestionController questionController;
 
@@ -36,7 +35,8 @@ public class AddLearningMaterialsHandler extends BotCommand {
   @Override
   public void execute(AbsSender absSender, User user, Chat chat, String[] strings) {
     if (strings.length == 0) {
-      SendMessage message = new SendMessage(chat.getId().toString(),MessageTest.MessageAddMaterials);
+      SendMessage message = new SendMessage(chat.getId().toString(),
+          MessageTest.MessageAddMaterials);
       try {
         absSender.execute(message);
       } catch (TelegramApiException e) {
@@ -45,7 +45,7 @@ public class AddLearningMaterialsHandler extends BotCommand {
     }
   }
 
-  public void addTheory (AbsSender absSender, User user, Chat chat, String message)
+  public void addTheory(AbsSender absSender, User user, Chat chat, String message)
       throws TelegramApiException {
 
     String[] parts = message.split(",\n");
@@ -68,18 +68,22 @@ public class AddLearningMaterialsHandler extends BotCommand {
       }
     }
 
-    if (dayNumber != 0 || msgNumber != 0 || theory.isEmpty() ) {
+    if (dayNumber != 0 || msgNumber != 0 || theory.isEmpty()) {
       if (theoryController.checkData(dayNumber, msgNumber) == 0) {
         theoryController.setTheory(dayNumber, msgNumber, theory);
         absSender.execute(
             new SendMessage(chat.getId().toString(), MessageTest.MessageAddTheorySuccess));
-      }else
-        absSender.execute(new SendMessage(chat.getId().toString(), MessageTest.MessageAddTheoryError));
+      } else {
+        absSender.execute(
+            new SendMessage(chat.getId().toString(), MessageTest.MessageAddTheoryError));
+      }
+    } else {
+      absSender.execute(
+          new SendMessage(chat.getId().toString(), MessageTest.MessageAddTheoryError2));
     }
-    else absSender.execute(new SendMessage(chat.getId().toString(), MessageTest.MessageAddTheoryError2));
   }
 
-  public void addTest (AbsSender absSender, User user, Chat chat, String message)
+  public void addTest(AbsSender absSender, User user, Chat chat, String message)
       throws TelegramApiException {
 
     String question = "";

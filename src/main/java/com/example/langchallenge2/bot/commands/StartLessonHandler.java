@@ -27,7 +27,8 @@ public class StartLessonHandler extends BotCommand {
   private final QuestionController questionController;
   private final TheoryController theoryController;
 
-  public StartLessonHandler(@Value(MessageTest.StartLesson) String commandIdentifier, @Value("") String description,
+  public StartLessonHandler(@Value(MessageTest.StartLesson) String commandIdentifier,
+      @Value("") String description,
       UserController userController, QuestionController questionController,
       TheoryController theoryController) {
     super(commandIdentifier, description);
@@ -45,13 +46,13 @@ public class StartLessonHandler extends BotCommand {
 
     int lesson = userController.getDayByChatId(chat.getId());
 
-    if(questionController.getCountQuestionInDay(lesson + 1) != 0){
+    if (questionController.getCountQuestionInDay(lesson + 1) != 0) {
       userController.incrementDay(user1);
       lesson = userController.getDayByChatId(chat.getId());
       System.out.println(lesson);
       int i = 1;
       System.out.println(theoryController.checkData(lesson, i));
-      while (theoryController.checkData(lesson, i) == 1){
+      while (theoryController.checkData(lesson, i) == 1) {
         Theory theory = theoryController.getQuestionInDay(lesson, i);
         SendMessage sendMessage = new SendMessage(chat.getId().toString(),
             theory.getTheory());
@@ -69,16 +70,16 @@ public class StartLessonHandler extends BotCommand {
       ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
       List<KeyboardRow> keyboard = new ArrayList<>();
       KeyboardRow row = new KeyboardRow();
-      KeyboardButton button = new KeyboardButton( MessageTest.MessageButtonStartTest );
+      KeyboardButton button = new KeyboardButton(MessageTest.MessageButtonStartTest);
       keyboardMarkup.setResizeKeyboard(true);
       row.add(button);
       keyboard.add(row);
       keyboardMarkup.setKeyboard(keyboard);
       keyboardMarkup.setOneTimeKeyboard(true);
       messageTheory.setReplyMarkup(keyboardMarkup);
-    }
-    else{
-      messageTheory = new SendMessage(chat.getId().toString(), MessageTest.MessageNotAvailableLesson);
+    } else {
+      messageTheory = new SendMessage(chat.getId().toString(),
+          MessageTest.MessageNotAvailableLesson);
     }
     try {
       messageTheory.enableHtml(true);
@@ -86,60 +87,5 @@ public class StartLessonHandler extends BotCommand {
     } catch (TelegramApiException e) {
       throw new RuntimeException(e);
     }
-      /*if(questionController.getCountQuestionInDay(lesson + 1) != 0) {
-      userController.incrementDay(user1);
-       lesson = userController.getDayByChatId(chat.getId());
-       if(lesson == 1) {
-         SendMessage sendMessage = new SendMessage(chat.getId().toString(),
-             MessageTest.MessageTheoryForTheFirstLesson);
-         sendMessage.enableHtml(true);
-         SendMessage sendMessage2 = new SendMessage(chat.getId().toString(),
-             MessageTest.MessageTheoryForTheFirstLesson2);
-         sendMessage2.enableHtml(true);
-         try {
-           absSender.execute(sendMessage);
-           Thread.sleep(1000);
-           absSender.execute(sendMessage2);
-         } catch (TelegramApiException | InterruptedException e) {
-           throw new RuntimeException(e);
-         }
-       }
-      else if(lesson == 2) {
-        SendMessage sendMessageLesson2Part1 = new SendMessage(chat.getId().toString(),
-            MessageTest.MessageTheoryForTheSecondLesson);
-        sendMessageLesson2Part1.enableHtml(true);
-        SendMessage sendMessageLesson2Part2 = new SendMessage(chat.getId().toString(),
-            MessageTest.MessageTheoryForTheSecondLesson2);
-        sendMessageLesson2Part2.enableHtml(true);
-        try {
-          absSender.execute(sendMessageLesson2Part1);
-          Thread.sleep(1000);
-          absSender.execute(sendMessageLesson2Part2);
-        } catch (TelegramApiException | InterruptedException e) {
-          throw new RuntimeException(e);
-        }
-      }
-      messageTheory = new SendMessage(chat.getId().toString(),
-          MessageTest.MessageStartTest);
-      ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
-      List<KeyboardRow> keyboard = new ArrayList<>();
-      KeyboardRow row = new KeyboardRow();
-      KeyboardButton button = new KeyboardButton( MessageTest.MessageButtonStartTest );
-      keyboardMarkup.setResizeKeyboard(true);
-      row.add(button);
-      keyboard.add(row);
-      keyboardMarkup.setKeyboard(keyboard);
-      keyboardMarkup.setOneTimeKeyboard(true);
-      messageTheory.setReplyMarkup(keyboardMarkup);
-    }
-    else{
-      messageTheory = new SendMessage(chat.getId().toString(), MessageTest.MessageNotAvailableLesson);
-    }
-      try {
-        messageTheory.enableHtml(true);
-        absSender.execute(messageTheory);
-      } catch (TelegramApiException e) {
-        throw new RuntimeException(e);
-      }*/
   }
 }
