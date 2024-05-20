@@ -100,7 +100,6 @@ public class QuizHandler extends BotCommand {
 
     List<InlineKeyboardButton> rowInline1 = new ArrayList<>();
 
-    // Створюємо список опцій та перемішуємо його
     List<String> options = new ArrayList<>();
     options.add(question.getCorrectAnswer());
     options.add(question.getOptionOne());
@@ -295,6 +294,5 @@ public class QuizHandler extends BotCommand {
       throw new RuntimeException(e);
     }
   }
-
 }
 

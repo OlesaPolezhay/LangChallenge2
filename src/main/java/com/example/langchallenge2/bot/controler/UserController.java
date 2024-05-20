@@ -84,7 +84,6 @@ public class UserController {
       User user = userOptional.get();
       return user.getQuestionNumber();
     } else {
-      // Обробка ситуації, коли користувача не знайдено за вказаним chatId
       return -1;
     }
   }
@@ -95,8 +94,7 @@ public class UserController {
       User user = userOptional.get();
       return user.getScore();
     } else {
-      // Обробка ситуації, коли користувача не знайдено за вказаним chatId
-      return -1; // Наприклад, повертаємо -1 або інше значення за замовчуванням
+      return -1;
     }
   }
 
@@ -106,11 +104,9 @@ public class UserController {
       User user = userOptional.get();
       return user.getDayNumber();
     } else {
-      // Обробка ситуації, коли користувача не знайдено за вказаним chatId
-      return -1; // Наприклад, повертаємо -1 або інше значення за замовчуванням
+      return -1;
     }
   }
-
 }
 
 

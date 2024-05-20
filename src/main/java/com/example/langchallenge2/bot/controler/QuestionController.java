@@ -30,5 +30,4 @@ public class QuestionController {
   public int checkQuestion (int day, int numberQuestion){
     return questionRepository.checkQuestion( day, numberQuestion);
   }
-
 }
